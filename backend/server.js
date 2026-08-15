@@ -44,7 +44,7 @@ app.use("/api/auth/login", authLimiter);
 
 // ---- Routes ----
 app.get("/api/health", (req, res) => {
-  res.status(200).json({ success: true, message: "TaskFlow API is running" });
+  res.status(200).json({ success: true, status: "OK", timestamp: new Date().toISOString(), message: "TaskFlow API is running" });
 });
 
 app.use("/api/auth", authRoutes);
