@@ -6,11 +6,14 @@ import {
   Users,
   X,
   Boxes,
+  LogOut,
 } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { closeSidebar } from "../../features/ui/uiSlice";
+import { logout } from "../../features/auth/authSlice";
 import RoleBadge from "../common/RoleBadge";
 import Avatar from "../common/Avatar";
+import { useNavigate } from "react-router-dom";
 
 const NAV_ITEMS = [
   { to: "/", label: "Dashboard", icon: LayoutGrid, roles: ["admin", "manager", "employee"] },
@@ -21,10 +24,16 @@ const NAV_ITEMS = [
 
 const Sidebar = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const { user } = useAppSelector((state) => state.auth);
   const sidebarOpen = useAppSelector((state) => state.ui.sidebarOpen);
 
   const visibleItems = NAV_ITEMS.filter((item) => item.roles.includes(user?.role));
+  const handleLogout = () => {
+    dispatch(logout());
+    dispatch(closeSidebar());
+    navigate("/login");
+  };
 
   const content = (
     <div className="flex flex-col h-full">
@@ -59,7 +68,7 @@ const Sidebar = () => {
       </nav>
 
       {/* User card */}
-      <div className="p-3 border-t border-white/10">
+      <div className="space-y-2 p-3 border-t border-white/10">
         <NavLink
           to="/profile"
           onClick={() => dispatch(closeSidebar())}
@@ -73,6 +82,14 @@ const Sidebar = () => {
             </div>
           </div>
         </NavLink>
+        <button
+          type="button"
+          onClick={handleLogout}
+          className="flex w-full items-center gap-3 rounded-lg px-2.5 py-2.5 text-sm font-medium text-slate-400 transition-colors hover:bg-rose-500/10 hover:text-rose-200"
+        >
+          <LogOut size={18} />
+          <span>Log out</span>
+        </button>
       </div>
     </div>
   );
