@@ -105,27 +105,6 @@ const Login = () => {
           <p className="text-sm text-slate-500 text-center mt-6">
             Accounts are created by an admin from the Team page.
           </p>
-
-          {/* Demo credentials */}
-          <div className="mt-8 p-4 rounded-xl bg-white border border-slate-200">
-            <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-2.5">
-              Demo accounts
-            </p>
-            <div className="space-y-1.5">
-              {DEMO_ACCOUNTS.map((acc) => (
-                <button
-                  key={acc.email}
-                  onClick={() => fillDemo(acc.email, acc.password)}
-                  className="w-full flex items-center justify-between text-left px-2.5 py-1.5 rounded-lg hover:bg-slate-50 transition-colors group"
-                >
-                  <span className="text-xs font-medium text-slate-600">{acc.role}</span>
-                  <span className="text-xs text-slate-400 group-hover:text-brand-600 font-mono">
-                    {acc.email}
-                  </span>
-                </button>
-              ))}
-            </div>
-          </div>
         </div>
       </div>
 
